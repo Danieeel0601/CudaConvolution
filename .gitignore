@@ -1,0 +1,19 @@
+# Ignorar archivos objeto y compilados
+*.o
+*.obj
+*.exe
+bin/*
+!bin/.gitkeep
+
+# Ignorar archivos de salida de imágenes (resultados de pruebas)
+images/output/*
+!images/output/.gitkeep
+
+# Archivos temporales y de sistema
+.DS_Store
+Thumbs.db
+*.swp
+*.log
+
+# No ignorar librerias de windows (para el profesor)
+!lib/windows/
