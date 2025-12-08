@@ -91,6 +91,44 @@ void selectFilter(const char* name, int* mask, int* width) {
 
         for(int i=0; i<9; i++) mask[i] = 1;
     }
+    else if (strcmp(name, "edge") == 0) {
+        mask[3] = -1; mask[4] = 1; 
+    }
+    else if (strcmp(name, "embossed") == 0) {
+        mask[0] = -2; mask[1] = -1; mask[3] = -1; mask[4] = 1; mask[5] = 1; 
+        mask[7] = 1; mask[8] = 2;
+    }
+    else if (strcmp(name, "border") == 0) {
+        mask[1] = 1; mask[3] = 1; mask[4] = -4; mask[5] = 1; mask[7] = 1; 
+    }
+    else if (strcmp(name, "sobel") == 0) {
+        mask[0] = -1; mask[2] = 1; mask[3] = -2; mask[5] = 2; mask[6] = -1; 
+        mask[8] = 1; 
+    }
+    else if (strcmp(name, "sharpen") == 0) {
+        mask[0] = mask[2] = mask[6] = mask[8] = 1;
+        mask[4] = 5; 
+        mask[1] = mask[3] = mask[5] = mask[7] = -2; 
+    }
+    else if (strcmp(name, "north") == 0) {
+        mask[0] = mask[1] = mask[2] = mask[3] = mask[5] = 1; 
+        mask[4] = -2;
+        mask[6] = mask[7] = mask[8] = -1; 
+    }
+    else if (strcmp(name, "east") == 0) {
+        mask[0] = mask[3] = mask[6] = -1; 
+        mask[4] = -2; 
+        mask[1] = mask[2] = mask[5] = mask[7] = mask[8] = 1; 
+    }
+    else if (strcmp(name, "gauss") == 0) {
+        *width = 5; 
+        mask[0] = mask[3] = mask[4] = mask[19] = mask[20] = mask[24] = 1; 
+        mask[1] = mask[5] = mask[9] = mask[15] = mask[21] = mask[23] = 2; 
+        mask[2] = mask[10] = mask[14] = mask[22] = 3; 
+        mask[6] = mask[8] = mask[16] = mask[18] = 7; 
+        mask[7] = mask[11] = mask[13] = mask[17] = 11; 
+        mask[12] = 17;
+    }
     else {
         // Default negative
         mask[1] = 1; mask[3] = 1; mask[4] = -5; mask[5] = 1; mask[7] = 1;
