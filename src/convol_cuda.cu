@@ -167,14 +167,14 @@ int main(int argc, char* argv[])
 
     cudaMemcpy(d_in, bits, imgSize, cudaMemcpyHostToDevice); 
 
-    // --- CONFIGURACION FILTRO ---
+    // --- FILTER CONFIG ---
     int h_mask[MAX_MASK_WIDTH * MAX_MASK_WIDTH];
     int maskWidth = 3;
     selectFilter(filterName, h_mask, &maskWidth);
     
     cudaMemcpyToSymbol(d_mask, h_mask, maskWidth * maskWidth * sizeof(int));
 
-    // --- CALCULO DE GRID Y SMEM ---
+    // --- GRID CALCULATION ---
     dim3 blockSize(TILE_W, TILE_W);
     dim3 gridSize((width + TILE_W - 1) / TILE_W, (height + TILE_W - 1) / TILE_W);
     
@@ -186,7 +186,7 @@ int main(int argc, char* argv[])
     printf("Shared Memory per block: %lu bytes\n", sharedMemSize);
 
     cudaEventRecord(start);
-    // Lanzamiento con 3er argumento: Shared Mem Size
+    //Kernel execution
     convolutionKernel<<<gridSize, blockSize, sharedMemSize>>>(d_in, d_out, width, height, maskWidth);
     cudaEventRecord(stop);
     
