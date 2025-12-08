@@ -1,19 +1,16 @@
-# Ignorar archivos objeto y compilados
+# Binaries and Object files
+bin/
 *.o
 *.obj
 *.exe
-bin/*
-!bin/.gitkeep
+*.out
 
-# Ignorar archivos de salida de imágenes (resultados de pruebas)
+# Output images (Keep the directory, ignore content)
 images/output/*
 !images/output/.gitkeep
 
-# Archivos temporales y de sistema
+# IDE and System files
+.vscode/
+.idea/
 .DS_Store
 Thumbs.db
-*.swp
-*.log
-
-# No ignorar librerias de windows (para el profesor)
-!lib/windows/

@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <iostream>
-#include "FreeImage.h"
+#include <FreeImage.h>
 
 /* Programa de tratamiento de imágenes.
  
@@ -36,13 +36,13 @@ int main()
 
 // carga el archivo foto.jpg en escala de grises en la estructura foto
 // y obtiene sus dimensiones
-	foto = FreeImage_Load(FIF_JPEG, "foto.jpg", JPEG_GREYSCALE);
+	foto = FreeImage_Load(FIF_JPEG, "images/input/foto.jpg", JPEG_GREYSCALE);
 	ancho = FreeImage_GetWidth(foto);
 	alto = FreeImage_GetHeight(foto);
 	dimension = ancho * alto;
 
 // almacena el contenido del arreglo foto en el archivo fotogris.jpg
-	FreeImage_Save(FIF_JPEG, foto, "fotogris.jpg",0);
+	FreeImage_Save(FIF_JPEG, foto, "images/output/fotogris_seq.jpg",0);
 
 // Reserva la memoria correspondiente a la foto resultado
 	FIBITMAP *fotoconv = FreeImage_Allocate(ancho, alto, 8);
@@ -59,7 +59,7 @@ int main()
 			pixel[i*ancho+j] = bits[(i-1)*ancho+j]+bits[(i+1)*ancho+j]+bits[i*ancho+j-1]+bits[i*ancho+j+1]-5*bits[i*ancho+j];
 
 //Guardar el arreglo de pixeles resultante en el archivo fotoconv.jpg
-	FreeImage_Save(FIF_JPEG, fotoconv, "fotoconv.jpg",0);
+	FreeImage_Save(FIF_JPEG, fotoconv, "images/output/fotoconv_seq.jpg",0);
 
 // terminaciòn de FreeImage
 	FreeImage_DeInitialise();
