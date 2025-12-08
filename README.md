@@ -52,6 +52,14 @@ Available filters:
 *   `negative` (default)
 *   `blur`
 *   `sharpen`
+*   `edge` (edge enhancement)
+*   `embossed`
+*   `border` (border detection)
+*   `sobel`
+*   `sharpen`
+*   `north`
+*   `east`
+*   `gauss` (gauss type)
 
 Example:
 ```bash
