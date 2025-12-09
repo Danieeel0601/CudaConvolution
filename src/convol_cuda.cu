@@ -5,7 +5,7 @@
 #include <FreeImage.h>
 
 #define MAX_MASK_WIDTH 15
-#define TILE_W 16 
+#define TILE_W 32
 
 //Constant Memory (Reserving space for the worst case)
 __constant__ int d_mask[MAX_MASK_WIDTH * MAX_MASK_WIDTH];
@@ -193,7 +193,7 @@ int main(int argc, char* argv[])
     cudaEventSynchronize(stop);
     cudaEventElapsedTime(&milliseconds, start, stop);
 
-    printf("GPU Time: %.5f ms\n", milliseconds);
+    printf("[BENCHMARK_RESULT],CUDA,%.5f\n", milliseconds);
 
     cudaMemcpy(pixel, d_out, imgSize, cudaMemcpyDeviceToHost);
 	

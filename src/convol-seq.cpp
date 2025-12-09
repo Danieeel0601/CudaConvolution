@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <iostream>
+#include <chrono>
 #include <FreeImage.h>
 
 /* Programa de tratamiento de imágenes.
@@ -53,10 +54,16 @@ int main()
   bits = (BYTE *) FreeImage_GetBits(foto);
 	pixel = (BYTE *) FreeImage_GetBits(fotoconv);
 
+    auto start = std::chrono::high_resolution_clock::now();
+
 // aplicacion de la matriz convolución	
 	for (i=1; i<alto-1; i++)
 		for (j=1; j<ancho-1; j++)
 			pixel[i*ancho+j] = bits[(i-1)*ancho+j]+bits[(i+1)*ancho+j]+bits[i*ancho+j-1]+bits[i*ancho+j+1]-5*bits[i*ancho+j];
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double, std::milli> duration = end - start;
+    std::cout << "[BENCHMARK_RESULT],SEQ," << duration.count() << std::endl;
 
 //Guardar el arreglo de pixeles resultante en el archivo fotoconv.jpg
 	FreeImage_Save(FIF_JPEG, fotoconv, "images/output/fotoconv_seq.jpg",0);
